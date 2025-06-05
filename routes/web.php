@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutosControllers;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalculosController;
@@ -29,5 +30,7 @@ Route::middleware('auth')->group(function () {
 // Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 // Route::post('/auth/login', [AuthController::class, 'login']);
 // Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::resource('produtos', ProdutosControllers::class);
 
 require __DIR__.'/auth.php';
