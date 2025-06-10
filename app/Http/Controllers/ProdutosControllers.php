@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 
@@ -28,7 +29,8 @@ class ProdutosControllers extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Produto::create($request->all());
+        return redirect()->route('produtos.index');
     }
 
     /**
