@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                <form method="POST" action="{{ route('produtos.store') }}">
+                <form method="POST" action="{{ route('produtos.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Nome -->
@@ -31,7 +31,13 @@
                         <x-input-error :messages="$errors->get('descricao')" class="mt-2" />
                     </div>
 
-                    <x-primary-button class="m-10">
+                    <div>
+                        <x-input-label for="imagem" :value="__('Imagem')" />
+                        <x-text-input id="imagem" class="block mt-1" type="file" accept="image/*" name="imagem" :value="old('imagem')" autofocus autocomplete="imagem" />
+                        <x-input-error :messages="$errors->get('imagem')" class="mt-2" />
+                    </div>
+
+                    <x-primary-button class="mt-20">
                         Gravar Produto
                     </x-primary-button>
                 </form>

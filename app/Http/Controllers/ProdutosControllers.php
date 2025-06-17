@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdutoRequest;
 use App\Models\Produto;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 
 class ProdutosControllers extends Controller
 {
@@ -13,7 +13,10 @@ class ProdutosControllers extends Controller
      */
     public function index()
     {
-        return view('produtos.index');
+        $produtos = Produto::all();
+        return view('produtos.index', [
+            "produtos" => $produtos
+        ]);
     }
 
     /**
@@ -27,9 +30,19 @@ class ProdutosControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
-        Produto::create($request->all());
+        $dados = $request->validated();
+        if ($request->hasFile('imagem')) {
+            $img = $request->file('imagem');
+            $path = $img->store('produtos', 'public');
+        }
+        Produto::create([
+            'nome' => $dados['nome'],
+            'preco' => $dados['preco'],
+            'descricao' => $dados['descricao'],
+            'imagem' => $path
+        ]);
         return redirect()->route('produtos.index');
     }
 
