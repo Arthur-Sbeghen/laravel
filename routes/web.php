@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProdutosControllers;
+use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalculosController;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
 // Route::post('/auth/login', [AuthController::class, 'login']);
 // Route::get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::resource('produtos', ProdutosControllers::class);
+Route::resource('produtos', ProdutosController::class);
+Route::resource('carrinho', CarrinhoController::class);
 
 require __DIR__.'/auth.php';
