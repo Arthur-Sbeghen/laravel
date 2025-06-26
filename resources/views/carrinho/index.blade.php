@@ -7,7 +7,7 @@
 
     <main class="grid grid-cols-3 gap-6 p-6">
     @if(count($carrinho) > 0)
-        @foreach ($carrinho as $i => $c)
+        @foreach ($carrinho as $c)
             <div>
                 @if(!empty($c->imagem))
                 <div>
@@ -17,6 +17,11 @@
                 <div>
                     <p>{{ $c->nome }}</p>
                     <p>{{ $c->valor }}</p>
+                    <form action="{{ route('carrinho.destroy', $c->id) }}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button type="submit" title="Deletar item">🗑️</button>
+                    </form>
                     <button type="button">Comprar</button>
                 </div>
             </div>

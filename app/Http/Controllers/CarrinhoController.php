@@ -13,7 +13,6 @@ class CarrinhoController extends Controller
     public function index()
     {
         $carrinho = session()->get('carrinho', []);
-        dd($carrinho);
         return view('carrinho.index', compact('carrinho'));
     }
 
@@ -32,17 +31,9 @@ class CarrinhoController extends Controller
         $id = $request->input('id');
         $dados = Produto::find($id);
         if ($dados) {
-            session()->push('carrinho', $dados);
-        } else {
-            return view('produtos.index', [
-                "produtos" => Produto::all(),
-                'alert' => "Não foi possível adicionar o produto ao carrinho"
-            ]);
+            session()->put('carrinho.'.$id, $dados);
         }
-        return view('produtos.index', [
-            "produtos" => Produto::all(),
-            "alert" => "Adicionado com sucesso!"
-        ]);
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -74,6 +65,7 @@ class CarrinhoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        session()->forget("carrinho.".$id);
+        return redirect()->route('produtos.index');
     }
 }
