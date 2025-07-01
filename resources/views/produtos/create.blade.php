@@ -37,6 +37,12 @@
                         <x-input-error :messages="$errors->get('imagem')" class="mt-2" />
                     </div>
 
+                    <div>
+                        <x-input-label for="categorias" :value="__('categorias')" />
+                        <x-text-input id="categorias" class="block mt-1" type="file" accept="image/*" name="categorias" :value="old('categorias')" autofocus autocomplete="categorias" />
+                        <x-input-error :messages="$errors->get('categorias')" class="mt-2" />
+                    </div>
+
                     <x-primary-button class="mt-20">
                         Gravar Produto
                     </x-primary-button>

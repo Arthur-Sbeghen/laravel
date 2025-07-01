@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProdutoRequest;
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        return view('produtos.create');
+        $categorias = Categoria::all()->pluck('nome', 'id')->toArray();
+        return view('produtos.create', $categorias);
     }
 
     /**

@@ -17,7 +17,11 @@ return new class extends Migration
             $table->float('preco');
             $table->text('descricao');
             $table->string('imagem')->nullable();
+            // $table->foreignId('categoria_id')->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('categoria_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');
         });
     }
 

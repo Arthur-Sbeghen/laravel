@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
@@ -34,5 +35,15 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('produtos', ProdutosController::class);
 Route::resource('carrinho', CarrinhoController::class);
+
+Route::prefix('categorias')->group(function () {
+    Route::get('/', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::get('/listar', [CategoriaController::class, 'listar'])->name('categorias.listar');
+    Route::post('/adicionar', [CategoriaController::class, 'adicionar'])->name('categorias.adicionar');
+    Route::delete('/deletar/{id}', [CategoriaController::class, 'deletar'])->name('categorias.deletar');
+    Route::get('/create', [CategoriaController::class, 'create'])->name('categorias.create');
+    Route::get('/editar/{id}', [CategoriaController::class, 'editar'])->name('categorias.editar');
+    Route::post('/edit', [CategoriaController::class, 'edit'])->name('categorias.edit');
+});
 
 require __DIR__.'/auth.php';
