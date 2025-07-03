@@ -33,6 +33,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">{{$p->nome}}</h2>
                 <p class="text-lg text-indigo-600 font-bold mb-2">R$ {{number_format($p->preco, 2, ',', '.')}}</p>
                 <p class="text-gray-600 text-sm mb-4">{{$p->descricao}}</p>
+                <p>{{ $p->categoria }}</p>
                 <form action="{{ route('carrinho.store') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $p->id }}">

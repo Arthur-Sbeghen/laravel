@@ -15,6 +15,10 @@ class ProdutosController extends Controller
     public function index()
     {
         $produtos = Produto::all();
+        foreach ($produtos as $produto) {
+            $produto->categoria = Categoria::find($produto->categoria_id);
+        }
+        dd($produtos);
         return view('produtos.index', [
             "produtos" => $produtos
         ]);
@@ -25,8 +29,10 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all()->pluck('nome', 'id')->toArray();
-        return view('produtos.create', $categorias);
+        $categorias = Categoria::all();
+        return view('produtos.create', [
+            'categorias' => $categorias
+        ]);
     }
 
     /**
@@ -43,7 +49,8 @@ class ProdutosController extends Controller
             'nome' => $dados['nome'],
             'preco' => $dados['preco'],
             'descricao' => $dados['descricao'],
-            'imagem' => $path
+            'imagem' => $path,
+            'categoria_id' => $request->input('categorias')
         ]);
         return redirect()->route('produtos.index');
     }

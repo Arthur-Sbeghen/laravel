@@ -39,7 +39,12 @@
 
                     <div>
                         <x-input-label for="categorias" :value="__('categorias')" />
-                        <x-text-input id="categorias" class="block mt-1" type="file" accept="image/*" name="categorias" :value="old('categorias')" autofocus autocomplete="categorias" />
+                        <select id="categorias" class="block mt-1" type="select" name="categorias" :value="old('categorias')" autofocus autocomplete="categorias">
+                            <option value="">Selecione uma categoria</option>
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                            @endforeach
+                        </select>
                         <x-input-error :messages="$errors->get('categorias')" class="mt-2" />
                     </div>
 
