@@ -22,9 +22,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
         ]);
+        
 
         $this->call([
             NotaSeeder::class,
+            UserSeeder::class,
+            CategoriaSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class
         ]);
     }
 }
